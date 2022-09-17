@@ -1,11 +1,11 @@
 
 import math
-from random import sample
+import  matplotlib.pyplot as plt
 
 # support_area = Received Votes 
 
 
-sample_votes = {"Vote1":{0:[1000, 2000, 3000]}}
+sample_votes = {"Vote1":{0:[1000, 2000, 3000]}, "Vote2":{0:[70, 100, 300]}}
 #sample_vote_dict = {"Proposition":{Square_area:[votes]}}
 
 
@@ -40,7 +40,7 @@ def find_info_area():
 
 def support_area_tax(proposition):                                          # Helper Func
     current_support_area = list(sample_votes[proposition].keys())[0]
-    minimum_tax = 0.05
+    minimum_tax = 1000                                                      # Value in Support Area
     relative_support_information = find_info_area()
     largest_support = relative_support_information[0]
     sum_of_areas = relative_support_information[1]
@@ -55,19 +55,41 @@ def support_area_tax(proposition):                                          # He
 def support_area_increase(proposition):
     proposition_dict = sample_votes[proposition]
     relative_support_area = list(proposition_dict.keys())[0]
-    relative_votes = list(proposition.values())[0]
+    relative_votes = list(proposition_dict.values())[0]
     relative_tax = support_area_tax(proposition)
     inverse_tax = (1 - relative_tax) ** 2
     new_support_difference = relative_support_area * inverse_tax
     sample_votes[proposition] = {new_support_difference : relative_votes}
-    print("Support Area has changed with Tax: {sample_votes}")
+    print("Support Area has changed with Tax: {}".format(sample_votes))
 
 
-# Testing Function
+# Testing Functions
+
+def graph_tests(array):
+    plt.plot(array)
+    plt.ylabel("Support Area With Tax")
+    plt.xlabel("Number of Votes")
+    plt.show()
+
+
 def test_model():
-    square_val_initializer = define_square_area("Vote1")
+    square_val_initializer = define_square_area("Vote1")   
+    support_area_increase_test = support_area_increase("Vote1")
+    print("-"*25)
+    square_val_initializer2 = define_square_area("Vote2")   
+    support_area_increase_test2 = support_area_increase("Vote2")
+
+    values = list(sample_votes.values())
+    test_array_of_areas = []
+    for dict in values:
+        key = list(dict.keys())[0]
+        test_array_of_areas.append(key)
+    
+    graph_tests(test_array_of_areas)
 
 test_model()
+
+
 
 
         
