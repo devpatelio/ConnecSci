@@ -20,13 +20,19 @@ export function ForceGraph(data) {
   }
   const defData = {
     nodes: [
-      { id: "Harry", cx: "250", yx: "140" },
+      { id: "Harry", cx: "0", yx: "10000" },
       { id: "Sally" },
       { id: "Alice" },
+      { id: "Hi", cx: "0", yx: "10000" },
+      { id: "Bye" },
+      { id: "bye" },
     ],
     links: [
       { source: "Harry", target: "Sally" },
       { source: "Harry", target: "Alice" },
+      { source: "Bye", target: "Hi" },
+      { source: "Bye", target: "bye" },
+      { source: "Bye", target: "Harry" },
     ],
   };
 
@@ -124,6 +130,7 @@ export function ForceGraph(data) {
     <Graph
       id="graph-id" // id is mandatory
       data={defData}
+      style={{ marginLeft: '500px' }}
       config={newConfig}
       onClickNode={onClickNode}
       onClickLink={onClickLink}
