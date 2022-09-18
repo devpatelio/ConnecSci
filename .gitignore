@@ -2,3 +2,5 @@ dblp.v12.json
 outputacm.txt
 final_embedding.csv
 embedding_training.csv
+my-app/node_modules
+my-app/.next
